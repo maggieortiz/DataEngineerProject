@@ -69,7 +69,7 @@ naturaldisaster_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster(
 
 # FINAL TABLES (Insert)
 co2emission_table_insert = ("""INSERT INTO co2emission 
-    (co2emission, country, code, year, co2emission BIGINT)
+    (co2emission_id, country, code, year, co2emission BIGINT)
     SELECT DISTINCT 
         co2emssion_id SERIAL ,
         country, 
@@ -77,6 +77,15 @@ co2emission_table_insert = ("""INSERT INTO co2emission
         year,
         co2emission 
         FROM co2emission_stage ; 
+""")
+population_table_insert = ("""INSERT INTO population 
+    (population_id, country, year, population BIGINT)
+    SELECT DISTINCT 
+        population_id SERIAL ,
+        country, 
+        year,
+        population 
+        FROM population_stage ; 
 """)
 # QUERY LISTS
 create_tables_queries = 
