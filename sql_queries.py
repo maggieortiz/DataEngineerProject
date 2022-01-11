@@ -87,6 +87,19 @@ population_table_insert = ("""INSERT INTO population
         population 
         FROM population_stage ; 
 """)
+
+surfacetemp_table_insert = ("""INSERT INTO surfacetemp 
+    (surfacetemp_id, year, month, country, avg_temperature, avg_temperature_uncertainty )
+    SELECT DISTINCT 
+        surfacetemp_id SERIAL ,
+        year,
+        month,
+        country, 
+        avg_temperature,
+        avg_temperature_uncertainty 
+        FROM surfacetemp_stage ; 
+""")
+
 # QUERY LISTS
 create_tables_queries = 
 drop_tables_queries = 
