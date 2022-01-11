@@ -19,7 +19,12 @@ co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
         co2emission int
         );
         """)
-population_create_table = 
+population_create_table = ("""CREATE TABLE IF NOT EXISTS population(
+        country varchar,
+        year int, 
+        population int
+        );
+        """)
 
 # CREATE TABLES
 
