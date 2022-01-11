@@ -65,7 +65,12 @@ naturaldisaster_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster(
         aid_contribution FLOAT,
         OFDA_response varchar);
          """)
-# CREATE TABLES
+# CREATE Staging TABLES
+co2emission_copy_table = ("""copy co2emission (country, code, year, CO2emission)
+        from  
+        iam_role 
+        Csv NOLOAD
+        IGNOREHEADER 1 """)
 
 # FINAL TABLES (Insert)
 co2emission_table_insert = ("""INSERT INTO co2emission 
