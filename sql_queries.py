@@ -37,7 +37,34 @@ surfacetemp_create_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp(
         avg_temperature_uncertainty double
         );
         """)
-
+naturaldisaster_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster(
+        naturaldisaster_id SERIAL PRIMARY KEY NOT NULL, 
+        year int, 
+        country varchar,
+        region varchar,
+        location varchar,
+        seq int, 
+        glide varchar, 
+        gisaster_group varchar,
+        gisaster_subgroup varchar,
+        diaster_type varchar, 
+        disaster_subtype varchar,
+        disaster_subsubtype varchar,
+        event_name varchar,
+        total_deaths FLOAT,
+        no_injured FLOAT,
+        no_affectED FLOAT,
+        no_homeless FLOAT,
+        total_affected FLOAT,
+        insured_damages FLOAT,
+        total_damages FLOAT,
+        cpi FLOAT,
+        geo_locations varchar, 
+        latitude FLOAT,
+        longitude FLOAT,
+        aid_contribution FLOAT,
+        OFDA_response varchar);
+         """)
 # CREATE TABLES
 
 # FINAL TABLES (Insert)
