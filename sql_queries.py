@@ -16,13 +16,23 @@ co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
         country varchar,
         code varchar(3),
         year int, 
-        co2emission int
-        );
+        co2emission BIGINT
+                );
         """)
 population_create_table = ("""CREATE TABLE IF NOT EXISTS population(
+        population_id SERIAL PRIMARY KEY NOT NULL,
         country varchar,
         year int, 
         population int
+        );
+        """)
+
+surfacetemp_create_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp(
+        year int,
+        month int,
+        country varchar,
+        avg_temperature double, 
+        avg_temperature_uncertainty double
         );
         """)
 
