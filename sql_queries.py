@@ -13,6 +13,7 @@ naturaldisaster_table_drop = "DROP TABLE IF EXISTS natural_disaster;"
 
 # CREATE TABLES
 co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
+        co2emission SERIAL PRIMARY KEY NOT NULL,
         country varchar,
         code varchar(3),
         year int, 
@@ -28,6 +29,7 @@ population_create_table = ("""CREATE TABLE IF NOT EXISTS population(
         """)
 
 surfacetemp_create_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp(
+        surfacetemp_id SERIAL PRIMARY KEY NOT NULL,
         year int,
         month int,
         country varchar,
