@@ -12,6 +12,14 @@ surfacetemp_table_drop = "DROP TABLE IF EXISTS surface_temp;"
 naturaldisaster_table_drop = "DROP TABLE IF EXISTS natural_disaster;"
 
 # CREATE TABLES
+co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
+        country varchar,
+        code varchar(3),
+        year int, 
+        co2emission int
+        );
+        """)
+population_create_table = 
 
 # CREATE TABLES
 
