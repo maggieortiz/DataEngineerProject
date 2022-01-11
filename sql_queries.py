@@ -72,6 +72,12 @@ co2emission_copy_table = ("""copy co2emission (country, code, year, CO2emission)
         Csv NOLOAD
         IGNOREHEADER 1 """)
 
+population_copy_table = ("""copy population (country name, year, population)
+        from  
+        iam_role 
+        Csv NOLOAD
+        IGNOREHEADER 1 """)
+
 # FINAL TABLES (Insert)
 co2emission_table_insert = ("""INSERT INTO co2emission 
     (co2emission_id, country, code, year, co2emission BIGINT)
