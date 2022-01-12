@@ -66,19 +66,19 @@ naturaldisaster_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster(
         OFDA_response varchar);
          """)
 # CREATE Staging TABLES
-co2emission_copy_table = ("""copy co2emission (country, code, year, CO2emission)
+co2emission_copy_table = ("""Copy co2emission (country, code, year, CO2emission)
         from  
         iam_role 
         Csv NOLOAD
         IGNOREHEADER 1 """)
 
-population_copy_table = ("""copy population (country name, year, population)
+population_copy_table = ("""Copy population (country name, year, population)
         from  
         iam_role 
         Csv NOLOAD
         IGNOREHEADER 1 """)
 
-surfacetemp_copy_table = ("""copy surfacetemp (dt, AverageTemperature, AverageTemperatureUncertainty, Country)
+surfacetemp_copy_table = ("""Copy surfacetemp (dt, AverageTemperature, AverageTemperatureUncertainty, Country)
         from  
         iam_role 
         Csv NOLOAD
@@ -118,7 +118,7 @@ surfacetemp_table_insert = ("""INSERT INTO surfacetemp
 """)
 
 # QUERY LISTS
-create_tables_queries = 
-drop_tables_queries = 
-copy_table_queries = 
-insert_table_queries = 
+create_tables_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisaster_create_table]
+drop_tables_queries = [surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisaster_table_drop]
+copy_table_queries = [surfacetemp_copy_table, co2emission_copy_table, population_copy_table]
+insert_table_queries = [surfacetemp_table_insert, co2emission_table_insert, population_table_insert]
