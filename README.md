@@ -1,5 +1,7 @@
 #Natural Disaster Countries vs CO2 emissions - Data Engineering Nanodegree
 
+Script Goal: 
+- Take these .csv data files and create an ETL to migrate data to tables in redshift 
 
 Tables: 
 - Co2emissions - emissions by country & year 
