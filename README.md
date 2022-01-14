@@ -1,5 +1,5 @@
 #Natural Disaster Countries vs CO2 emissions - Data Engineering Nanodegree
-
+- Final Project for the Data Engineering Nano-degree w/ Udacity
 Script Goal: 
 - Take these .csv data files and create an ETL to migrate data to tables in redshift 
 
@@ -24,3 +24,4 @@ Queries:
 Graphs: 
 - Graph natural Disater by emission
 - emission by population 
+
