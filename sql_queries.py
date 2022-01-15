@@ -85,7 +85,7 @@ surfacetemp_copy_table = ("""Copy surfacetemp (dt, AverageTemperature, AverageTe
         IGNOREHEADER 1 """)
 
 naturaldisaster_copy_table = ("""Copy naturaldisaster(
-        naturaldisaster_id SERIAL, 
+        naturaldisaster_id, 
         year, 
         country,
         region,
@@ -148,6 +148,41 @@ surfacetemp_table_insert = ("""INSERT INTO surfacetemp
         FROM surfacetemp_stage ; 
 """)
 
+naturaldiasterinfo_table_insert = ("""INSERT INTO naturaldiaster_info
+        naturaldisaster_id SERIAL PRIMARY KEY NOT NULL,  
+        year int, 
+        country varchar,
+        region varchar,
+        location varchar,
+        seq int, 
+        glide varchar, 
+        gisaster_group varchar,
+        gisaster_subgroup varchar,
+        diaster_type varchar, 
+        disaster_subtype varchar,
+        disaster_subsubtype varchar,
+        event_name varchar,
+        geo_locations varchar, 
+        latitude FLOAT,
+        longitude FLOAT,
+                 """)
+naturaldiasterresult_table_insert ("""INSERT INTO naturaldisaster_result
+        naturaldisaster_id SERIAL PRIMARY KEY NOT NULL, 
+        year int, 
+        country varchar,
+        region varchar,
+        event_name varchar,
+        total_deaths FLOAT,
+        no_injured FLOAT,
+        no_affectED FLOAT,
+        no_homeless FLOAT,
+        total_affected FLOAT,
+        insured_damages FLOAT,
+        total_damages FLOAT,
+        cpi FLOAT,
+        aid_contribution FLOAT,
+        OFDA_response varchar);
+         """)
 # QUERY LISTS
 create_tables_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisaster_create_table]
 drop_tables_queries = [surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisaster_table_drop]
