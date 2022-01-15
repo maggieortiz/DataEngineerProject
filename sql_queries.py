@@ -171,7 +171,8 @@ naturaldiasterinfo_table_insert = ("""INSERT INTO naturaldiaster_info
         event_name varchar,
         geo_locations varchar, 
         latitude FLOAT,
-        longitude FLOAT,
+        longitude FLOAT
+        FROM naturaldisaster ; 
                  """)
 naturaldiasterresult_table_insert ("""INSERT INTO naturaldisaster_result
         naturaldisaster_id SERIAL PRIMARY KEY NOT NULL, 
@@ -188,7 +189,8 @@ naturaldiasterresult_table_insert ("""INSERT INTO naturaldisaster_result
         total_damages FLOAT,
         cpi FLOAT,
         aid_contribution FLOAT,
-        OFDA_response varchar);
+        OFDA_response varchar
+        FROM natural disaster;
          """)
 # QUERY LISTS
 create_tables_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisaster_create_table]
