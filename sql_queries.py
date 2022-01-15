@@ -10,7 +10,7 @@ co2emission_table_drop = "DROP TABLE IF EXISTS co2_emission;"
 population_table_drop = "DROP TABLE IF EXISTS population;"
 surfacetemp_table_drop = "DROP TABLE IF EXISTS surface_temp;"
 naturaldisasterinfo_table_drop = "DROP TABLE IF EXISTS naturaldisaster_info;"
-naturaldisasterresult_table_drop = "DROP TABLE IF EXISTS naturaldisaster_result ; "
+naturaldisasterdamage_table_drop = "DROP TABLE IF EXISTS naturaldisaster_damage ; "
 
 # CREATE TABLES
 co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
@@ -56,7 +56,7 @@ naturaldisasterinfo_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaste
         latitude FLOAT,
         longitude FLOAT );
          """)
-naturaldisasterresults_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_results(
+naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_damage(
         naturaldisaster_id SERIAL PRIMARY KEY NOT NULL, 
         year int, 
         country varchar,
@@ -174,7 +174,7 @@ naturaldiasterinfo_table_insert = ("""INSERT INTO naturaldiaster_info
         longitude FLOAT
         FROM naturaldisaster ; 
                  """)
-naturaldiasterresult_table_insert ("""INSERT INTO naturaldisaster_result
+naturaldiasterdamage_table_insert ("""INSERT INTO naturaldisaster_damage
         naturaldisaster_id SERIAL PRIMARY KEY NOT NULL, 
         year int, 
         country varchar,
@@ -193,7 +193,7 @@ naturaldiasterresult_table_insert ("""INSERT INTO naturaldisaster_result
         FROM natural disaster;
          """)
 # QUERY LISTS
-create_tables_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table naturaldisasterresults_create_table]
-drop_tables_queries = [surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterresult_table_drop]
+create_tables_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table naturaldisasterdamage_create_table]
+drop_tables_queries = [surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
 copy_table_queries = [surfacetemp_copy_table, co2emission_copy_table, population_copy_table, naturaldisaster_copy_table]
-insert_table_queries = [surfacetemp_table_insert, co2emission_table_insert, population_table_insert, naturaldisasterresults_table_insert, naturaldisasterinfo_table_insert]
+insert_table_queries = [surfacetemp_table_insert, co2emission_table_insert, population_table_insert, naturaldisasterdamage_table_insert, naturaldisasterinfo_table_insert]
