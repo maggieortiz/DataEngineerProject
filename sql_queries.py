@@ -84,6 +84,37 @@ surfacetemp_copy_table = ("""Copy surfacetemp (dt, AverageTemperature, AverageTe
         Csv NOLOAD
         IGNOREHEADER 1 """)
 
+naturaldisaster_copy_table = ("""Copy naturaldisaster(
+        naturaldisaster_id SERIAL, 
+        year, 
+        country,
+        region,
+        location,
+        seq, 
+        glide, 
+        gisaster_group,
+        gisaster_subgroup,
+        diaster_type, 
+        disaster_subtype,
+        disaster_subsubtype,
+        event_name,
+        total_deaths,
+        no_injured,
+        no_affectED,
+        no_homeless,
+        total_affected,
+        insured_damages,
+        total_damages,
+        cpi,
+        geo_locations, 
+        latitude,
+        longitude,
+        aid_contribution,
+        OFDA_response
+        from
+        iam_role
+        csv NOLOAD
+        IGNOREHEADER 1        """)
 # FINAL TABLES (Insert)
 co2emission_table_insert = ("""INSERT INTO co2emission 
     (co2emission_id, country, code, year, co2emission BIGINT)
