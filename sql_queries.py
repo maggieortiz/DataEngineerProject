@@ -73,25 +73,25 @@ naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisas
         OFDA_response varchar);
          """)
 # CREATE Staging TABLES
-co2emission_copy_table = ("""Copy co2emission (country, code, year, CO2emission)
+co2emission_copy_table = ("""Copy co2emission_stage (country, code, year, CO2emission)
         from {}
         iam_role {} 
         Csv NOLOAD
         IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_CO2EMISSION'])
 
-population_copy_table = ("""Copy population (country name, year, population)
+population_copy_table = ("""Copy population_stage (country name, year, population)
         from  {}
         iam_role {} 
         Csv NOLOAD
         IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_POPULATION'])
 
-surfacetemp_copy_table = ("""Copy surfacetemp (dt, AverageTemperature, AverageTemperatureUncertainty, Country)
+surfacetemp_copy_table = ("""Copy surfacetemp_stage (dt, AverageTemperature, AverageTemperatureUncertainty, Country)
         from {}
         iam_role {}
         Csv NOLOAD
         IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_SURFACETEMP'])
 
-naturaldisaster_copy_table = ("""Copy naturaldisaster(
+naturaldisaster_copy_table = ("""Copy naturaldisaster_stage(
         naturaldisaster_id, 
         year, 
         country,
@@ -172,7 +172,7 @@ naturaldiasterinfo_table_insert = ("""INSERT INTO naturaldiaster_info
         geo_locations varchar, 
         latitude FLOAT,
         longitude FLOAT
-        FROM naturaldisaster ; 
+        FROM naturaldisaster_stage ; 
                  """)
 naturaldiasterdamage_table_insert ("""INSERT INTO naturaldisaster_damage
         naturaldisaster_id SERIAL PRIMARY KEY NOT NULL, 
@@ -190,7 +190,7 @@ naturaldiasterdamage_table_insert ("""INSERT INTO naturaldisaster_damage
         cpi FLOAT,
         aid_contribution FLOAT,
         OFDA_response varchar
-        FROM natural disaster;
+        FROM natural disaster_stage;
          """)
 # QUERY LISTS
 create_table_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table naturaldisasterdamage_create_table]
