@@ -193,7 +193,7 @@ naturaldiasterdamage_table_insert ("""INSERT INTO naturaldisaster_damage
         FROM natural disaster;
          """)
 # QUERY LISTS
-create_tables_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table naturaldisasterdamage_create_table]
-drop_tables_queries = [surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
+create_table_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table naturaldisasterdamage_create_table]
+drop_table_queries = [surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
 copy_table_queries = [surfacetemp_copy_table, co2emission_copy_table, population_copy_table, naturaldisaster_copy_table]
 insert_table_queries = [surfacetemp_table_insert, co2emission_table_insert, population_table_insert, naturaldisasterdamage_table_insert, naturaldisasterinfo_table_insert]
