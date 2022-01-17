@@ -155,7 +155,7 @@ surfacetemp_table_insert = ("""INSERT INTO surfacetemp
         FROM surfacetemp_stage ; 
 """)
 
-naturaldiasterinfo_table_insert = ("""INSERT INTO naturaldiaster_info
+naturaldisasterinfo_table_insert = ("""INSERT INTO naturaldiaster_info
         naturaldisaster_id SERIAL PRIMARY KEY NOT NULL,  
         year int, 
         country varchar,
@@ -174,7 +174,7 @@ naturaldiasterinfo_table_insert = ("""INSERT INTO naturaldiaster_info
         longitude FLOAT
         FROM naturaldisaster_stage ; 
                  """)
-naturaldiasterdamage_table_insert ("""INSERT INTO naturaldisaster_damage
+naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage
         naturaldisaster_id SERIAL PRIMARY KEY NOT NULL, 
         year int, 
         country varchar,
@@ -190,10 +190,10 @@ naturaldiasterdamage_table_insert ("""INSERT INTO naturaldisaster_damage
         cpi FLOAT,
         aid_contribution FLOAT,
         OFDA_response varchar
-        FROM natural disaster_stage;
+        FROM naturaldisaster_stage;
          """)
 # QUERY LISTS
-create_table_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table naturaldisasterdamage_create_table]
+create_table_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table, naturaldisasterdamage_create_table]
 drop_table_queries = [surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
 copy_table_queries = [surfacetemp_copy_table, co2emission_copy_table, population_copy_table, naturaldisaster_copy_table]
 insert_table_queries = [surfacetemp_table_insert, co2emission_table_insert, population_table_insert, naturaldisasterdamage_table_insert, naturaldisasterinfo_table_insert]
