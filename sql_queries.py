@@ -74,22 +74,22 @@ naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisas
          """)
 # CREATE Staging TABLES
 co2emission_copy_table = ("""Copy co2emission (country, code, year, CO2emission)
-        from  
-        iam_role 
+        from {}
+        iam_role {} 
         Csv NOLOAD
-        IGNOREHEADER 1 """)
+        IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_CO2EMISSION'])
 
 population_copy_table = ("""Copy population (country name, year, population)
-        from  
-        iam_role 
+        from  {}
+        iam_role {} 
         Csv NOLOAD
-        IGNOREHEADER 1 """)
+        IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_POPULATION'])
 
 surfacetemp_copy_table = ("""Copy surfacetemp (dt, AverageTemperature, AverageTemperatureUncertainty, Country)
-        from  
-        iam_role 
+        from {}
+        iam_role {}
         Csv NOLOAD
-        IGNOREHEADER 1 """)
+        IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_SURFACETEMP'])
 
 naturaldisaster_copy_table = ("""Copy naturaldisaster(
         naturaldisaster_id, 
@@ -118,10 +118,10 @@ naturaldisaster_copy_table = ("""Copy naturaldisaster(
         longitude,
         aid_contribution,
         OFDA_response
-        from
-        iam_role
+        from {}
+        iam_role {}
         csv NOLOAD
-        IGNOREHEADER 1        """)
+        IGNOREHEADER 1        """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_NATURALDISASTER'])
 # FINAL TABLES (Insert)
 co2emission_table_insert = ("""INSERT INTO co2emission 
     (co2emission_id, country, code, year, co2emission BIGINT)
