@@ -1,9 +1,16 @@
-#Natural Disaster Countries vs CO2 emissions - Data Engineering Nanodegree
+# Natural Disaster Countries vs CO2 emissions - Data Engineering Nanodegree
 - Final Project for the Data Engineering Nano-degree w/ Udacity
-Script Goal: 
+
+### Script Goal: 
 - Take these .csv data files and create an ETL to migrate data to tables in redshift 
 
-Tables: 
+### Steps: 
+1. Run Create Redshift and IAM role Notebook
+2. Run Testing notebook 
+3. Write your Queries you want 
+4. Close Redshift cluster with first jypter notebook 
+
+### Tables: 
 - Co2emissions - emissions by country & year 
 - Population - population by country & year 
 - Surface Temperature - surfacetemp by country & year 
@@ -15,13 +22,13 @@ Tables:
     - and much more information about the damages 
 
 
-Queries: 
+### Queries: 
 - Count Natural Diasters by country
 - GroupBy Natural Disaster type & look at deaths & damages to find the worst type of disaster 
 - Table with natural disaster count by country and order by population 
 - 
 
-Graphs: 
+### Graphs: 
 - Graph natural Disater by emission
 - emission by population 
 
