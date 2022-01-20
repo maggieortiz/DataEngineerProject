@@ -81,7 +81,7 @@ co2emission_create_stage_table = ("""CREATE TABLE IF NOT EXISTS co2emssion_stage
                 );
         """)
 population_create_stage_table = ("""CREATE TABLE IF NOT EXISTS population_stage(
-        'country name' varchar,
+        ountry varchar,
         year int, 
         population int
         );
