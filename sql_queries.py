@@ -14,7 +14,7 @@ naturaldisasterdamage_table_drop = "DROP TABLE IF EXISTS naturaldisaster_damage 
 
 # CREATE TABLES
 co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
-        co2emission PRIMARY KEY NOT NULL,
+        co2emission_id int PRIMARY KEY NOT NULL,
         country varchar,
         code varchar(3),
         year int, 
@@ -22,7 +22,7 @@ co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
                 );
         """)
 population_create_table = ("""CREATE TABLE IF NOT EXISTS population(
-        population_id PRIMARY KEY NOT NULL,
+        population_id int PRIMARY KEY NOT NULL,
         country varchar,
         year int, 
         population int
@@ -30,16 +30,16 @@ population_create_table = ("""CREATE TABLE IF NOT EXISTS population(
         """)
 
 surfacetemp_create_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp(
-        surfacetemp_id PRIMARY KEY NOT NULL,
+        surfacetemp_id int PRIMARY KEY NOT NULL,
         year int,
         month int,
         country varchar,
-        avg_temperature double, 
-        avg_temperature_uncertainty double
+        avg_temperature FLOAT, 
+        avg_temperature_uncertainty FLOAT
         );
         """)
 naturaldisasterinfo_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_info(
-        naturaldisaster_id PRIMARY KEY NOT NULL, 
+        naturaldisaster_id int PRIMARY KEY NOT NULL, 
         year int, 
         country varchar,
         region varchar,
@@ -57,7 +57,7 @@ naturaldisasterinfo_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaste
         longitude FLOAT );
          """)
 naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_damage(
-        naturaldisaster_id PRIMARY KEY NOT NULL, 
+        naturaldisaster_id int PRIMARY KEY NOT NULL, 
         year int, 
         country varchar,
         event_name varchar,
@@ -146,7 +146,7 @@ population_table_insert = ("""INSERT INTO population
 surfacetemp_table_insert = ("""INSERT INTO surfacetemp 
     (surfacetemp_id, year, month, country, avg_temperature, avg_temperature_uncertainty )
     SELECT DISTINCT 
-        surfacetemp_id ,
+        surfacetemp_id SERIAL ,
         year,
         month,
         country, 
