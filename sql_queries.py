@@ -72,20 +72,46 @@ naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisas
         aid_contribution FLOAT,
         OFDA_response varchar);
          """)
+# CREATE TABLES
+co2emission_create_stage_table = ("""CREATE TABLE IF NOT EXISTS co2emssion_stage(
+        co2emission_id int PRIMARY KEY NOT NULL,
+        country varchar,
+        code varchar(3),
+        year int, 
+        co2emission BIGINT
+                );
+        """)
+population_create_stage_table = ("""CREATE TABLE IF NOT EXISTS population_stage(
+        population_id int PRIMARY KEY NOT NULL,
+        country varchar,
+        year int, 
+        population int
+        );
+        """)
+
+surfacetemp_create_stage_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp_stage(
+        surfacetemp_id int PRIMARY KEY NOT NULL,
+        year int,
+        month int,
+        country varchar,
+        avg_temperature FLOAT, 
+        avg_temperature_uncertainty FLOAT
+        );
+        """)
 # CREATE Staging TABLES
-co2emission_copy_table = ("""Copy co2emission_stage (country, code, year, CO2emission)
+co2emission_copy_table = ("""Copy co2emission_stage(country, code, year, CO2emission)
         from {}
         iam_role {} 
         Csv NOLOAD
         IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_CO2EMISSION'])
 
-population_copy_table = ("""Copy population_stage (country name, year, population)
+population_copy_table = ("""Copy population_stage(country name, year, population)
         from  {}
         iam_role {} 
         Csv NOLOAD
         IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_POPULATION'])
 
-surfacetemp_copy_table = ("""Copy surfacetemp_stage (dt, AverageTemperature, AverageTemperatureUncertainty, Country)
+surfacetemp_copy_table = ("""Copy surfacetemp_stage(dt, AverageTemperature, AverageTemperatureUncertainty, Country)
         from {}
         iam_role {}
         Csv NOLOAD
