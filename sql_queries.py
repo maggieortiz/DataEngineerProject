@@ -72,30 +72,26 @@ naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisas
         aid_contribution FLOAT,
         OFDA_response varchar);
          """)
-# CREATE TABLES
+# CREATE STAGING TABLES
 co2emission_create_stage_table = ("""CREATE TABLE IF NOT EXISTS co2emssion_stage(
-        co2emission_id int PRIMARY KEY NOT NULL,
         country varchar,
         code varchar(3),
         year int, 
-        co2emission BIGINT
+        CO2emission BIGINT
                 );
         """)
 population_create_stage_table = ("""CREATE TABLE IF NOT EXISTS population_stage(
-        population_id int PRIMARY KEY NOT NULL,
-        country varchar,
+        country name varchar,
         year int, 
         population int
         );
         """)
 
 surfacetemp_create_stage_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp_stage(
-        surfacetemp_id int PRIMARY KEY NOT NULL,
-        year int,
-        month int,
-        country varchar,
-        avg_temperature FLOAT, 
-        avg_temperature_uncertainty FLOAT
+        dt int,
+        AverageTemperature FLOAT, 
+        AverageTemperatureUncertainty FLOAT, 
+        Country varchar
         );
         """)
 # CREATE Staging TABLES
@@ -219,7 +215,7 @@ naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage
         FROM naturaldisaster_stage;
          """)
 # QUERY LISTS
-create_table_queries = [surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table, naturaldisasterdamage_create_table]
+create_table_queries = [co2emission_create_stage_table, population_create_stage_table, surfacetemp_create_stage_table, surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table, naturaldisasterdamage_create_table]
 drop_table_queries = [surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
 copy_table_queries = [surfacetemp_copy_table, co2emission_copy_table, population_copy_table, naturaldisaster_copy_table]
 insert_table_queries = [surfacetemp_table_insert, co2emission_table_insert, population_table_insert, naturaldisasterdamage_table_insert, naturaldisasterinfo_table_insert]
