@@ -81,7 +81,7 @@ co2emission_create_stage_table = ("""CREATE TABLE IF NOT EXISTS co2emssion_stage
                 );
         """)
 population_create_stage_table = ("""CREATE TABLE IF NOT EXISTS population_stage(
-        ountry varchar,
+        country varchar,
         year int, 
         population int
         );
@@ -110,8 +110,8 @@ population_copy_table = ("""Copy population_stage(country name, year, population
 surfacetemp_copy_table = ("""Copy surfacetemp_stage(dt, AverageTemperature, AverageTemperatureUncertainty, Country)
         from {}
         iam_role {}
-        Csv NOLOAD
-        IGNOREHEADER 1 """).format(config['IAM_ROLE']['ARN'], config['S3']['CSV_SURFACETEMP'])
+        FORMAT AS csv 'auto';
+        IGNOREHEADER 1 """).format(config['S3']['CSV_SURFACETEMP'], config['IAM_ROLE']['ARN'])
 
 naturaldisaster_copy_table = ("""Copy naturaldisaster_stage(
         naturaldisaster_id, 
