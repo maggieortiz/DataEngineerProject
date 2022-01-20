@@ -111,7 +111,7 @@ surfacetemp_copy_table = ("""Copy surfacetemp_stage(dt, AverageTemperature, Aver
         from {}
         iam_role {}
         Csv NOLOAD
-        IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_SURFACETEMP'])
+        IGNOREHEADER 1 """).format(config['IAM_ROLE']['ARN'], config['S3']['CSV_SURFACETEMP'])
 
 naturaldisaster_copy_table = ("""Copy naturaldisaster_stage(
         naturaldisaster_id, 
