@@ -88,7 +88,7 @@ population_create_stage_table = ("""CREATE TABLE IF NOT EXISTS population_stage(
         """)
 
 surfacetemp_create_stage_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp_stage(
-        dt int,
+        dt varchar,
         AverageTemperature FLOAT, 
         AverageTemperatureUncertainty FLOAT, 
         Country varchar
