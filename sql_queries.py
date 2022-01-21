@@ -6,12 +6,15 @@ config = configparser.ConfigParser()
 config.read('dwh.cfg')
 
 # DROP TABLES
-co2emission_table_drop = "DROP TABLE IF EXISTS co2_emission;"
+co2emission_table_drop = "DROP TABLE IF EXISTS co2emission;"
 population_table_drop = "DROP TABLE IF EXISTS population;"
-surfacetemp_table_drop = "DROP TABLE IF EXISTS surface_temp;"
+surfacetemp_table_drop = "DROP TABLE IF EXISTS surfacetemp;"
 naturaldisasterinfo_table_drop = "DROP TABLE IF EXISTS naturaldisaster_info;"
 naturaldisasterdamage_table_drop = "DROP TABLE IF EXISTS naturaldisaster_damage ; "
-
+co2emission_stage_table_drop = "DROP TABLE IF EXISTS co2emission_stage;"
+population_stage_table_drop = "DROP TABLE IF EXISTS population_stage;"
+surfacetemp_stage_table_drop = "DROP TABLE IF EXISTS surfacetemp_stage;"
+naturaldisaster_stage_table_drop = "DROP TABLE IF EXISTS naturaldisaster_stage;"
 # CREATE TABLES
 co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
         co2emission_id int PRIMARY KEY NOT NULL,
@@ -94,7 +97,7 @@ surfacetemp_create_stage_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp_stag
         Country varchar
         );
         """)
-naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_damage(
+naturaldisaster_staging_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_stage(
         year int, 
         country varchar,
         region varchar,
@@ -242,7 +245,7 @@ naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage
         FROM naturaldisaster_stage;
          """)
 # QUERY LISTS
-create_table_queries = [co2emission_create_stage_table, population_create_stage_table, surfacetemp_create_stage_table, surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table, naturaldisasterdamage_create_table]
-drop_table_queries = [surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
+create_table_queries = [naturaldisaster_staging_create_table , co2emission_create_stage_table, population_create_stage_table, surfacetemp_create_stage_table, surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table, naturaldisasterdamage_create_table]
+drop_table_queries = [naturaldisaster_stage_table_drop, surfacetemp_stage_table_drop, population_stage_table_drop, co2emission_stage_table_drop, surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
 copy_table_queries = [surfacetemp_copy_table, co2emission_copy_table, population_copy_table, naturaldisaster_copy_table]
 insert_table_queries = [surfacetemp_table_insert, co2emission_table_insert, population_table_insert, naturaldisasterdamage_table_insert, naturaldisasterinfo_table_insert]
