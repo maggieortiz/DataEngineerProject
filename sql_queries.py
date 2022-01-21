@@ -88,7 +88,7 @@ population_create_stage_table = ("""CREATE TABLE IF NOT EXISTS population_stage(
         """)
 
 surfacetemp_create_stage_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp_stage(
-        dt varchar,
+        dt DATE,
         AverageTemperature FLOAT, 
         AverageTemperatureUncertainty FLOAT, 
         Country varchar
@@ -107,11 +107,11 @@ population_copy_table = ("""Copy population_stage(country name, year, population
         Csv NOLOAD
         IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_POPULATION'])
 
-surfacetemp_copy_table = ("""Copy surfacetemp_stage(dt, AverageTemperature, AverageTemperatureUncertainty, Country)
+surfacetemp_copy_table = ("""Copy surfacetemp_stage
         from {}
         iam_role {}
-        FORMAT AS csv 'auto';
-        IGNOREHEADER 1 """).format(config['S3']['CSV_SURFACETEMP'], config['IAM_ROLE']['ARN'])
+        FORMAT AS csv 
+        IGNOREHEADER 1 ;""").format(config['S3']['CSV_SURFACETEMP'], config['IAM_ROLE']['ARN'])
 
 naturaldisaster_copy_table = ("""Copy naturaldisaster_stage(
         naturaldisaster_id, 
@@ -169,11 +169,11 @@ surfacetemp_table_insert = ("""INSERT INTO surfacetemp
     (surfacetemp_id, year, month, country, avg_temperature, avg_temperature_uncertainty )
     SELECT DISTINCT 
         surfacetemp_id SERIAL ,
-        year,
-        month,
-        country, 
-        avg_temperature,
-        avg_temperature_uncertainty 
+        extract(year from dt) as year,
+        EXTRACT(month from dt) as month,
+        Country as country, 
+        AverageTemperature as avg_temperature,
+        AverageTemperatureUncertainty as avg_temperature_uncertainty 
         FROM surfacetemp_stage ; 
 """)
 
