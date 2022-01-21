@@ -19,9 +19,9 @@ naturaldisaster_stage_table_drop = "DROP TABLE IF EXISTS naturaldisaster_stage;"
 co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
         co2emission_id int PRIMARY KEY NOT NULL,
         country varchar,
-        code varchar(3),
+        code varchar,
         year int, 
-        co2emission BIGINT
+        co2emission FLOAT
                 );
         """)
 population_create_table = ("""CREATE TABLE IF NOT EXISTS population(
@@ -56,8 +56,8 @@ naturaldisasterinfo_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaste
         disaster_subsubtype varchar,
         event_name varchar,
         geo_locations varchar, 
-        latitude FLOAT,
-        longitude FLOAT );
+        latitude varchar,
+        longitude varchar );
          """)
 naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_damage(
         naturaldisaster_id int PRIMARY KEY NOT NULL, 
@@ -76,12 +76,12 @@ naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisas
         OFDA_response varchar);
          """)
 # CREATE STAGING TABLES
-co2emission_create_stage_table = ("""CREATE TABLE IF NOT EXISTS co2emssion_stage(
+co2emission_create_stage_table = ("""CREATE TABLE IF NOT EXISTS co2emission_stage(
         country varchar,
-        code varchar(3),
+        code varchar,
         year int, 
-        CO2emission BIGINT
-                );
+        CO2emission FLOAT
+        );
         """)
 population_create_stage_table = ("""CREATE TABLE IF NOT EXISTS population_stage(
         country varchar,
@@ -99,40 +99,61 @@ surfacetemp_create_stage_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp_stag
         """)
 naturaldisaster_staging_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_stage(
         year int, 
-        country varchar,
-        region varchar,
-        location varchar,
         seq int, 
-        glide varchar, 
-        gisaster_group varchar,
-        gisaster_subgroup varchar,
+        glide varchar,
+        disaster_group varchar,
+        disaster_subgroup varchar,
         diaster_type varchar, 
         disaster_subtype varchar,
         disaster_subsubtype varchar,
-        geo_locations varchar, 
-        latitude FLOAT,
-        longitude FLOAT,
         event_name varchar,
+        country varchar,
+        iso varchar,
+        region varchar,
+        continent varchar,
+        location varchar,
+        origin varchar, 
+        associated_dis varchar,
+        associated_dis2 varchar,
+        OFDA_response varchar, 
+        appeal varchar,
+        declaration varchar,
+        aid_contribution FLOAT,
+        dis_mag_value FLOAT,
+        dis_mag_scale varchar,
+        latitude varchar,
+        longitude varchar,
+        local_time varchar,
+        river_basin varchar,
+        start_year BIGINT,
+        start_month varchar,
+        start_day int,
+        end_year BIGINT,
+        end_month varchar,
+        end_day int,
         total_deaths FLOAT,
         no_injured FLOAT,
-        no_affectED FLOAT,
+        no_affected FLOAT,
         no_homeless FLOAT,
         total_affected FLOAT,
         insured_damages FLOAT,
         total_damages FLOAT,
         cpi FLOAT,
-        aid_contribution FLOAT,
-        OFDA_response varchar);
+        adm_level int,
+        admin1_code int, 
+        admin2_code int, 
+        geo_locations varchar
+        );
          """)
 # CREATE Staging TABLES
-co2emission_copy_table = ("""Copy co2emission_stage(country, code, year, CO2emission)
+co2emission_copy_table = ("""Copy co2emission_stage
         from {}
         iam_role {}
         Csv NOLOAD
         IGNOREHEADER 1
         delimiter ',' ;""").format(config['S3']['CSV_CO2EMISSION'], config['IAM_ROLE']['ARN'] )
 
-population_copy_table = ("""Copy population_stage(country name, year, population)
+population_copy_table = ("""Copy population_stage
         from  {}
         iam_role {} 
         Csv NOLOAD
@@ -147,33 +168,7 @@ surfacetemp_copy_table = ("""Copy surfacetemp_stage
         delimiter ','
          ;""").format(config['S3']['CSV_SURFACETEMP'], config['IAM_ROLE']['ARN'])
 
-naturaldisaster_copy_table = ("""Copy naturaldisaster_stage(
-        naturaldisaster_id, 
-        year, 
-        country,
-        region,
-        location,
-        seq, 
-        glide, 
-        gisaster_group,
-        gisaster_subgroup,
-        diaster_type, 
-        disaster_subtype,
-        disaster_subsubtype,
-        event_name,
-        total_deaths,
-        no_injured,
-        no_affectED,
-        no_homeless,
-        total_affected,
-        insured_damages,
-        total_damages,
-        cpi,
-        geo_locations, 
-        latitude,
-        longitude,
-        aid_contribution,
-        OFDA_response
+naturaldisaster_copy_table = ("""Copy naturaldisaster_stage
         from {}
         iam_role {}
         csv NOLOAD
