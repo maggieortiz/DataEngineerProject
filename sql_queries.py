@@ -127,21 +127,25 @@ naturaldisaster_staging_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldis
 # CREATE Staging TABLES
 co2emission_copy_table = ("""Copy co2emission_stage(country, code, year, CO2emission)
         from {}
-        iam_role {} 
+        iam_role {}
         Csv NOLOAD
-        IGNOREHEADER 1 """).format(config['S3']['CSV_CO2EMISSION'], config['IAM_ROLE']['ARN'] )
+        IGNOREHEADER 1
+        delimiter ',' ;""").format(config['S3']['CSV_CO2EMISSION'], config['IAM_ROLE']['ARN'] )
 
 population_copy_table = ("""Copy population_stage(country name, year, population)
         from  {}
         iam_role {} 
         Csv NOLOAD
-        IGNOREHEADER 1 """).format(config['S3']['CSV_POPULATION'], config['IAM_ROLE']['ARN'])
+        IGNOREHEADER 1
+        delimiter ',' ;""").format(config['S3']['CSV_POPULATION'], config['IAM_ROLE']['ARN'])
 
 surfacetemp_copy_table = ("""Copy surfacetemp_stage
         from {}
         iam_role {}
-        FORMAT AS csv 
-        IGNOREHEADER 1 ;""").format(config['S3']['CSV_SURFACETEMP'], config['IAM_ROLE']['ARN'])
+        Csv NOLOAD
+        IGNOREHEADER 1 
+        delimiter ','
+         ;""").format(config['S3']['CSV_SURFACETEMP'], config['IAM_ROLE']['ARN'])
 
 naturaldisaster_copy_table = ("""Copy naturaldisaster_stage(
         naturaldisaster_id, 
@@ -173,7 +177,8 @@ naturaldisaster_copy_table = ("""Copy naturaldisaster_stage(
         from {}
         iam_role {}
         csv NOLOAD
-        IGNOREHEADER 1        """).format(config['S3']['CSV_NATURALDISASTER'], config['IAM_ROLE']['ARN'])
+        IGNOREHEADER 1 
+        delimiter ','      ; """).format(config['S3']['CSV_NATURALDISASTER'], config['IAM_ROLE']['ARN'])
 # FINAL TABLES (Insert)
 co2emission_table_insert = ("""INSERT INTO co2emission 
     (co2emission_id, country, code, year, co2emission BIGINT)
