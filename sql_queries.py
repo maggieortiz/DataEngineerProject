@@ -17,36 +17,32 @@ surfacetemp_stage_table_drop = "DROP TABLE IF EXISTS surfacetemp_stage;"
 naturaldisaster_stage_table_drop = "DROP TABLE IF EXISTS naturaldisaster_stage;"
 # CREATE TABLES
 co2emission_create_table = ("""CREATE TABLE IF NOT EXISTS co2emssion(
-        co2emission_id int PRIMARY KEY NOT NULL,
-        country varchar,
+        country varchar NOT NULL,
         code varchar,
-        year int, 
+        year int NOT NULL, 
         co2emission FLOAT
                 );
         """)
 population_create_table = ("""CREATE TABLE IF NOT EXISTS population(
-        population_id int PRIMARY KEY NOT NULL,
-        country varchar,
-        year int, 
+        country varchar NOT NULL,
+        year int NOT NULL, 
         population int
         );
         """)
 
 surfacetemp_create_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp(
-        surfacetemp_id int PRIMARY KEY NOT NULL,
-        year int,
+        year int NOT NULL,
         month int,
-        country varchar,
+        country varchar NOT NULL,
         avg_temperature FLOAT, 
         avg_temperature_uncertainty FLOAT
         );
         """)
 naturaldisasterinfo_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_info(
-        naturaldisaster_id int PRIMARY KEY NOT NULL, 
-        year int, 
+        year int NOT NULL, 
         country varchar,
         region varchar,
-        location varchar,
+        location varchar(5000),
         seq int, 
         glide varchar, 
         gisaster_group varchar,
@@ -55,13 +51,12 @@ naturaldisasterinfo_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaste
         disaster_subtype varchar,
         disaster_subsubtype varchar,
         event_name varchar,
-        geo_locations varchar, 
+        geo_locations varchar(5000), 
         latitude varchar,
         longitude varchar );
          """)
 naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_damage(
-        naturaldisaster_id int PRIMARY KEY NOT NULL, 
-        year int, 
+        year int NOT NULL, 
         country varchar,
         event_name varchar,
         total_deaths FLOAT,
@@ -111,7 +106,7 @@ naturaldisaster_staging_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldis
         iso varchar,
         region varchar,
         continent varchar,
-        location varchar,
+        location varchar(5000),
         origin varchar, 
         associated_dis varchar,
         associated_dis2 varchar,
@@ -124,7 +119,7 @@ naturaldisaster_staging_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldis
         latitude varchar,
         longitude varchar,
         local_time varchar,
-        river_basin varchar,
+        river_basin varchar(1000),
         start_year BIGINT,
         start_month varchar,
         start_day int,
@@ -139,10 +134,10 @@ naturaldisaster_staging_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldis
         insured_damages FLOAT,
         total_damages FLOAT,
         cpi FLOAT,
-        adm_level int,
-        admin1_code int, 
-        admin2_code int, 
-        geo_locations varchar
+        adm_level varchar,
+        admin1_code varchar(5000), 
+        admin2_code varchar(5000), 
+        geo_locations varchar(5000)
         );
          """)
 # CREATE Staging TABLES
@@ -176,41 +171,37 @@ naturaldisaster_copy_table = ("""Copy naturaldisaster_stage
         delimiter ','      ; """).format(config['S3']['CSV_NATURALDISASTER'], config['IAM_ROLE']['ARN'])
 # FINAL TABLES (Insert)
 co2emission_table_insert = ("""INSERT INTO co2emission 
-    (co2emission_id, country, code, year, co2emission BIGINT)
+    (country, code, year, co2emission BIGINT)
     SELECT DISTINCT 
-        co2emssion_id SERIAL ,
-        country, 
+        country NOT NULL, 
         code,
-        year,
+        year NOT NULL,
         co2emission 
         FROM co2emission_stage ; 
 """)
 population_table_insert = ("""INSERT INTO population 
-    (population_id, country, year, population BIGINT)
+    (country, year, population BIGINT)
     SELECT DISTINCT 
-        population_id SERIAL ,
-        country, 
-        year,
+        country NOT NULL, 
+        year NOT NULL,
         population 
         FROM population_stage ; 
 """)
 
 surfacetemp_table_insert = ("""INSERT INTO surfacetemp 
-    (surfacetemp_id, year, month, country, avg_temperature, avg_temperature_uncertainty )
+    (year, month, country, avg_temperature, avg_temperature_uncertainty )
     SELECT DISTINCT 
-        surfacetemp_id SERIAL ,
-        extract(year from dt) as year,
+        extract(year from dt) as year NOT NULL,
         EXTRACT(month from dt) as month,
-        Country as country, 
+        Country as country NOT NULL, 
         AverageTemperature as avg_temperature,
         AverageTemperatureUncertainty as avg_temperature_uncertainty 
         FROM surfacetemp_stage ; 
 """)
 
-naturaldisasterinfo_table_insert = ("""INSERT INTO naturaldiaster_info
-        naturaldisaster_id SERIAL PRIMARY KEY NOT NULL,  
-        year int, 
-        country varchar,
+naturaldisasterinfo_table_insert = ("""INSERT INTO naturaldiaster_info  
+        year int NOT NULL, 
+        country varchar NOT NULL,
         region varchar,
         location varchar,
         seq int, 
