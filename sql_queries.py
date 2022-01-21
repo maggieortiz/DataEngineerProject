@@ -99,13 +99,13 @@ co2emission_copy_table = ("""Copy co2emission_stage(country, code, year, CO2emis
         from {}
         iam_role {} 
         Csv NOLOAD
-        IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_CO2EMISSION'])
+        IGNOREHEADER 1 """).format(config['S3']['CSV_CO2EMISSION'], config['IAM_ROLE']['ARN'] )
 
 population_copy_table = ("""Copy population_stage(country name, year, population)
         from  {}
         iam_role {} 
         Csv NOLOAD
-        IGNOREHEADER 1 """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_POPULATION'])
+        IGNOREHEADER 1 """).format(config['S3']['CSV_POPULATION'], config['IAM_ROLE']['ARN'])
 
 surfacetemp_copy_table = ("""Copy surfacetemp_stage
         from {}
@@ -143,7 +143,7 @@ naturaldisaster_copy_table = ("""Copy naturaldisaster_stage(
         from {}
         iam_role {}
         csv NOLOAD
-        IGNOREHEADER 1        """).format(config['S3']['CSV_PATH'], config['IAM_ROLE']['ARN'], config['S3']['CSV_NATURALDISASTER'])
+        IGNOREHEADER 1        """).format(config['S3']['CSV_NATURALDISASTER'], config['IAM_ROLE']['ARN'])
 # FINAL TABLES (Insert)
 co2emission_table_insert = ("""INSERT INTO co2emission 
     (co2emission_id, country, code, year, co2emission BIGINT)
