@@ -5,10 +5,11 @@
 - Take these .csv data files and create an ETL to migrate data to tables in redshift 
 
 ### Steps: 
-1. Run Create Redshift and IAM role Notebook
-2. Run Testing notebook 
-3. Write your Queries you want 
-4. Close Redshift cluster with first jypter notebook 
+1. Add CSV files to an S3 bucket
+1. Create Redshift and IAM role in AWS portal
+2. Run 'ETL Testing Notebook'
+3. Perform the queries and analysis in question 
+4. Close Redshift cluster and S3 bucket in AWS portal
 
 ### Tables: 
 - Co2emissions - emissions by country & year 
