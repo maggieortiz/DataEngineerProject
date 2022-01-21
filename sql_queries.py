@@ -94,6 +94,33 @@ surfacetemp_create_stage_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp_stag
         Country varchar
         );
         """)
+naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_damage(
+        year int, 
+        country varchar,
+        region varchar,
+        location varchar,
+        seq int, 
+        glide varchar, 
+        gisaster_group varchar,
+        gisaster_subgroup varchar,
+        diaster_type varchar, 
+        disaster_subtype varchar,
+        disaster_subsubtype varchar,
+        geo_locations varchar, 
+        latitude FLOAT,
+        longitude FLOAT,
+        event_name varchar,
+        total_deaths FLOAT,
+        no_injured FLOAT,
+        no_affectED FLOAT,
+        no_homeless FLOAT,
+        total_affected FLOAT,
+        insured_damages FLOAT,
+        total_damages FLOAT,
+        cpi FLOAT,
+        aid_contribution FLOAT,
+        OFDA_response varchar);
+         """)
 # CREATE Staging TABLES
 co2emission_copy_table = ("""Copy co2emission_stage(country, code, year, CO2emission)
         from {}
