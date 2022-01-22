@@ -22,6 +22,11 @@
     - Number of people affected
     - and much more information about the damages 
 
+### Questions: 
+1. What will the data be used for? 
+    - Data will be used to look at correlation between natural disaster, co2 emissions for that country, population, number of deaths, and the rate of change of certain surface temperatures. 
+2. How the user use this data model?
+    - After creating redshift data, user can query data as they wish to find results to particular questions, or create visualizations.  
 
 ### Queries: 
 - Count Natural Diasters by country
