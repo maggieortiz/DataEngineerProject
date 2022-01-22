@@ -61,7 +61,7 @@ naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisas
         event_name varchar,
         total_deaths FLOAT,
         no_injured FLOAT,
-        no_affectED FLOAT,
+        no_affected FLOAT,
         no_homeless FLOAT,
         total_affected FLOAT,
         insured_damages FLOAT,
