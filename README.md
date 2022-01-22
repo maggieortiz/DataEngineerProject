@@ -26,7 +26,17 @@
 1. What will the data be used for? 
     - Data will be used to look at correlation between natural disaster, co2 emissions for that country, population, number of deaths, and the rate of change of certain surface temperatures. 
 2. How the user use this data model?
-    - After creating redshift data, user can query data as they wish to find results to particular questions, or create visualizations.  
+    - After creating redshift data, user can query data as they wish to find results to particular questions, or create visualizations. 
+3. Why did you choose this approach? 
+    - AWS datawarehouse is a structured way to store large amounts of data which I think is useful for answering a variety of questions while keeping the data in a structured form. 
+4. How often should this data be updated? 
+    - Yearly. The population, natural disaster, co2emissions are yearly based and while the surface temp is a monthly statistic, I think aggregating it yearly would make sense for the scope of this analysis.  
+5. The data was increased by 100x.
+    - As long as the data update is monthly or yearly like suggested I think a datawarehouse could handle it. 
+6. The pipelines would be run on a daily basis by 7 am every day.
+    - I think this set up would handle being run every day. 
+7. The database needed to be accessed by 100+ people. 
+    - I think it might need to be changed to a Spark data lake to handle the mulitple access points. 
 
 ### Queries: 
 - Count Natural Diasters by country
