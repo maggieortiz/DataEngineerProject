@@ -3,6 +3,7 @@
 
 ### Script Goal: 
 - Take these .csv data files and create an ETL to migrate data to tables in redshift 
+- Check out Data_Model.ipynb to see the final Data Model structure
 
 ### Steps: 
 1. Add CSV files to an S3 bucket
