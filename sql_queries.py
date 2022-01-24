@@ -59,6 +59,8 @@ naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisas
         year int NOT NULL, 
         country varchar NOT NULL,
         event_name varchar,
+        disaster_group varchar,
+        disaster_type varchar,
         total_deaths FLOAT,
         no_injured FLOAT,
         no_affected FLOAT,
@@ -237,9 +239,11 @@ naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage
         (year, 
         country,
         event_name,
+        disaster_group,
+        disaster_type,
         total_deaths,
         no_injured,
-        no_affectED,
+        no_affected,
         no_homeless,
         total_affected,
         insured_damages ,
@@ -252,9 +256,11 @@ naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage
         year, 
         country,
         event_name,
+        disaster_group,
+        disaster_type,
         total_deaths,
         no_injured,
-        no_affectED,
+        no_affected,
         no_homeless,
         total_affected,
         insured_damages ,
@@ -264,6 +270,12 @@ naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage
         OFDA_response
         FROM naturaldisaster_stage;
          """)
+
+surfacetemp_selectall = {""" SELECT * from surfacetemp """}
+co2emission_selectall = {"""SELECT * FROM co2emission"""}
+population_selectall = {"""SELECT * FROM population"""}
+naturaldisaster_info_selectall = {"""SELECT * FROM naturaldisaster_info"""}
+naturaldisaster_damage_selectall = {"""SELECT * FROM naturaldisaster_damage"""}
 # QUERY LISTS
 create_table_queries = [naturaldisaster_staging_create_table , co2emission_create_stage_table, population_create_stage_table, surfacetemp_create_stage_table, surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table, naturaldisasterdamage_create_table]
 drop_table_queries = [naturaldisaster_stage_table_drop, surfacetemp_stage_table_drop, population_stage_table_drop, co2emission_stage_table_drop, surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
