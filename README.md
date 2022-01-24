@@ -9,6 +9,9 @@
 1. Add CSV files to an S3 bucket
 1. Create Redshift and IAM role in AWS portal
 2. Run 'ETL Testing Notebook'
+    a. Run create_table.py - create tables
+    b. Run etl.py - copy data from csv to redshift
+    c. Run data_quality.py - check for empty tables and null values 
 3. Perform the queries and analysis in question 
 4. Close Redshift cluster and S3 bucket in AWS portal
 
