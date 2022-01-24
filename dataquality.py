@@ -1,7 +1,7 @@
 
 import configparser
 import psycopg2
-from sql_queries import rowcolcheck_queries
+from sql_queries import rowcolcheck_queries , checknull_queries
 import pandas as pd
 import numpy as np
 
@@ -11,21 +11,18 @@ def checkrownumb(cur, conn):
     pd_temp = pd.read_csv('C:\\Users\\msbar\\Data Engineering Final Project\\data\\GlobalLandTemperaturesByCountry.csv')
     pd_pop = pd.read_csv('C:\\Users\\msbar\\Data Engineering Final Project\\data\\Population\\population_total_long.csv')
     pd_em = pd.read_csv("C:\\Users\\msbar\\Data Engineering Final Project\\data\\co2_emission.csv")
-    shape = [][]
-    shape[0][0] = pd_d.shape[0]
-    shape[0][1] = pd_d.shape[1]
-    shape[1][0] = pd_temp.shape[0]
-    shape[1][1] = pd_temp.shape[1]
-    shape[2][0] = pd_pop.shape[0]
-    shape[2][1] = pd_pop.shape[1]
-    shape[3][0] = pd_em.shape[0]
-    shape[3][1] = pd_em.shape[1]
+    shape = [0,0]
+    shape.insert(0, [pd_d.shape[0], pd_d.shape[1] ])
+    shape.insert(1, [pd_temp.shape[0], pd_temp.shape[1] ])
+    shape.insert(2, [pd_pop.shape[0], pd_pop.shape[1] ])
+    shape.insert(3, [pd_em.shape[0], pd_em.shape[1] ])
+
     i = 0 
     for query in rowcolcheck_queries:
         df = cur.execute(query)
-        if df.shape[0] == shape[i, 0]
+        if df.shape[0] == shape[i][0]:
             print("All rows have been entered")
-        if df.shape[1] == shape[i, 1]
+        if df.shape[1] == shape[i][1]:
             print("All columns have been entered")
         i = i + 1
         #conn.commit()
@@ -33,29 +30,34 @@ def checkrownumb(cur, conn):
 
 def checknulls(cur, conn):
     pd_d = pd.read_csv('C:\\Users\\msbar\\Data Engineering Final Project\\data\\DISASTERS\\1900_2021_DISASTERS.csv')
+    na = pd_d.isna().sum()
+    dg = na['Disaster Group']/pd_d.shape[0]
+    dt = na['Disaster Type']/pd_d.shape[0]
+    total_deaths = na['Total Deaths']/pd_d.shape[0]
 
-    for query in row_queries:
-        na = pd_d.isna().sum()
-        dg = na['Disaster Group']/pd_d.shape[0]
-        if dg > 0.0
+    for query in checknull_queries:
+        df = cur.execute(query)
+        na_f = df.isna().sum()
+        dg_f = na_f['Disaster Group']/pd_d.shape[0]
+        dt_f = na_f['Disaster Type']/pd_d.shape[0]
+        total_deaths_f = na['Total Deaths']/pd_d.shape[0]
+        if dg_f > 0:
             print("Disaster Group Nulls Exist")
-        else 
+        else:
             print("Disaster Group contains no Nulls")
 
-        dt = na['Disaster Type']/pd_d.shape[0]
-        if dt > 0.0
+        if dt_f > 0:
             print("Disaster Type Nulls Exist")
-        else 
+        else: 
             print("Disaster Type contains no Nulls")
 
-         total_deaths = na['Total Deaths']/pd_d.shape[0]
-        if total_deaths > 0.3 
+        if total_deaths_f >= total_deaths:
             print("More than 30 percent total_death rows are empty")
-        else 
+        else:
             print("Total Deaths are filled out for more than 30 percent of rows")
         
-        cur.execute(query)
-        conn.commit()
+        #cur.execute(query)
+        #conn.commit()
 
 
 def main():
@@ -64,8 +66,7 @@ def main():
 
     conn = psycopg2.connect("host={} dbname={} user={} password={} port={}".format(*config['CLUSTER'].values()))
     cur = conn.cursor()
-    
-    checkrownumb(cur, conn)
+    checkrownumb(cur,conn)
     checknulls(cur, conn)
 
     conn.close()
