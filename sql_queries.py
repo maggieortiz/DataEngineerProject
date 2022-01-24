@@ -39,6 +39,7 @@ surfacetemp_create_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp(
         );
         """)
 naturaldisasterinfo_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_info(
+        naturaldisaster_id int PRIMARY KEY, 
         year int NOT NULL, 
         country varchar NOT NULL,
         region varchar,
@@ -56,6 +57,7 @@ naturaldisasterinfo_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaste
         longitude varchar );
          """)
 naturaldisasterdamage_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_damage(
+        naturaldisaster_id int PRIMARY KEY, 
         year int NOT NULL, 
         country varchar NOT NULL,
         event_name varchar,
@@ -95,6 +97,7 @@ surfacetemp_create_stage_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp_stag
         );
         """)
 naturaldisaster_staging_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_stage(
+        naturaldisaster_id SERIAL,
         year int, 
         seq int, 
         glide varchar,
@@ -202,7 +205,8 @@ surfacetemp_table_insert = ("""INSERT INTO surfacetemp
 """)
 
 naturaldisasterinfo_table_insert = ("""INSERT INTO naturaldisaster_info
-        (year, 
+        (naturaldisaster_id, 
+        year, 
         country,
         region,
         location,
@@ -236,7 +240,8 @@ naturaldisasterinfo_table_insert = ("""INSERT INTO naturaldisaster_info
         FROM naturaldisaster_stage ; 
                  """)
 naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage 
-        (year, 
+        (naturaldisaster_id, 
+        year, 
         country,
         event_name,
         disaster_group,
