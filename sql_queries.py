@@ -281,3 +281,5 @@ create_table_queries = [naturaldisaster_staging_create_table , co2emission_creat
 drop_table_queries = [naturaldisaster_stage_table_drop, surfacetemp_stage_table_drop, population_stage_table_drop, co2emission_stage_table_drop, surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
 copy_table_queries = [surfacetemp_copy_table, co2emission_copy_table, population_copy_table, naturaldisaster_copy_table]
 insert_table_queries = [surfacetemp_table_insert, co2emission_table_insert, population_table_insert, naturaldisasterdamage_table_insert, naturaldisasterinfo_table_insert]
+rowcolcheck_queries = naturaldisaster_info_selectall, surfacetemp_selectall, population_selectall, co2emission_selectall
+checknull_queries = naturaldisaster_info_selectall
