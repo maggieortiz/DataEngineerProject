@@ -48,7 +48,7 @@ naturaldisasterinfo_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaste
         glide varchar, 
         disaster_group varchar,
         disaster_subgroup varchar,
-        diaster_type varchar, 
+        disaster_type varchar, 
         disaster_subtype varchar,
         disaster_subsubtype varchar,
         event_name varchar,
@@ -97,13 +97,13 @@ surfacetemp_create_stage_table = ("""CREATE TABLE IF NOT EXISTS surfacetemp_stag
         );
         """)
 naturaldisaster_staging_create_table = ("""CREATE TABLE IF NOT EXISTS naturaldisaster_stage(
-        naturaldisaster_id SERIAL,
+        naturaldisaster_id INT IDENTITY(1, 1),
         year int, 
         seq int, 
         glide varchar,
         disaster_group varchar,
         disaster_subgroup varchar,
-        diaster_type varchar, 
+        disaster_type varchar, 
         disaster_subtype varchar,
         disaster_subsubtype varchar,
         event_name varchar,
@@ -196,7 +196,7 @@ population_table_insert = ("""INSERT INTO population
 surfacetemp_table_insert = ("""INSERT INTO surfacetemp 
     (year, month, country, avg_temperature, avg_temperature_uncertainty)
     SELECT DISTINCT 
-        EXTRACT(year from dt) as year ,
+        CAST(EXTRACT(year from dt) AS int) as year ,
         EXTRACT(month from dt) as month,
         Country as country, 
         AverageTemperature as avg_temperature,
@@ -205,7 +205,8 @@ surfacetemp_table_insert = ("""INSERT INTO surfacetemp
 """)
 
 naturaldisasterinfo_table_insert = ("""INSERT INTO naturaldisaster_info
-        (naturaldisaster_id, 
+        (
+        naturaldisaster_id,
         year, 
         country,
         region,
@@ -214,14 +215,16 @@ naturaldisasterinfo_table_insert = ("""INSERT INTO naturaldisaster_info
         glide, 
         disaster_group,
         disaster_subgroup,
-        diaster_type, 
+        disaster_type, 
         disaster_subtype,
         disaster_subsubtype,
         event_name,
         geo_locations, 
         latitude,
         longitude)
+
         SELECT DISTINCT
+        naturaldisaster_id,
         year, 
         country,
         region,
@@ -230,7 +233,7 @@ naturaldisasterinfo_table_insert = ("""INSERT INTO naturaldisaster_info
         glide, 
         disaster_group,
         disaster_subgroup,
-        diaster_type, 
+        disaster_type, 
         disaster_subtype,
         disaster_subsubtype,
         event_name,
@@ -240,7 +243,8 @@ naturaldisasterinfo_table_insert = ("""INSERT INTO naturaldisaster_info
         FROM naturaldisaster_stage ; 
                  """)
 naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage 
-        (naturaldisaster_id, 
+        (
+        naturaldisaster_id,
         year, 
         country,
         event_name,
@@ -258,6 +262,7 @@ naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage
         OFDA_response)
 
         SELECT DISTINCT
+        naturaldisaster_id,
         year, 
         country,
         event_name,
@@ -276,15 +281,15 @@ naturaldisasterdamage_table_insert = ("""INSERT INTO naturaldisaster_damage
         FROM naturaldisaster_stage;
          """)
 
-surfacetemp_selectall = {""" SELECT * from surfacetemp """}
-co2emission_selectall = {"""SELECT * FROM co2emission"""}
-population_selectall = {"""SELECT * FROM population"""}
-naturaldisaster_info_selectall = {"""SELECT * FROM naturaldisaster_info"""}
-naturaldisaster_damage_selectall = {"""SELECT * FROM naturaldisaster_damage"""}
+surfacetemp_selectall = (''' SELECT * from surfacetemp; ''')
+co2emission_selectall = ("""SELECT * FROM co2emission;""")
+population_selectall = ("""SELECT * FROM population;""")
+naturaldisaster_info_selectall = ('''SELECT * FROM naturaldisaster_info ''')
+naturaldisaster_damage_selectall = ("""SELECT * FROM naturaldisaster_damage;""")
 # QUERY LISTS
 create_table_queries = [naturaldisaster_staging_create_table , co2emission_create_stage_table, population_create_stage_table, surfacetemp_create_stage_table, surfacetemp_create_table, co2emission_create_table, population_create_table, naturaldisasterinfo_create_table, naturaldisasterdamage_create_table]
 drop_table_queries = [naturaldisaster_stage_table_drop, surfacetemp_stage_table_drop, population_stage_table_drop, co2emission_stage_table_drop, surfacetemp_table_drop, co2emission_table_drop, population_table_drop, naturaldisasterinfo_table_drop, naturaldisasterdamage_table_drop]
 copy_table_queries = [surfacetemp_copy_table, co2emission_copy_table, population_copy_table, naturaldisaster_copy_table]
 insert_table_queries = [surfacetemp_table_insert, co2emission_table_insert, population_table_insert, naturaldisasterdamage_table_insert, naturaldisasterinfo_table_insert]
-rowcolcheck_queries = naturaldisaster_info_selectall, surfacetemp_selectall, population_selectall, co2emission_selectall
-checknull_queries = naturaldisaster_info_selectall
+rowcolcheck_queries = [naturaldisaster_info_selectall, surfacetemp_selectall, population_selectall, co2emission_selectall]
+checknull_queries = [naturaldisaster_damage_selectall]
