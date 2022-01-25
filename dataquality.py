@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 
 def checkrownumb(cur, conn):
-    # naturaldisaster, surface temp, population, co2emissions
+    text = ['naturaldisaster', 'surface temp', 'population', 'co2emissions']
     pd_d = pd.read_csv('C:\\Users\\msbar\\Data Engineering Final Project\\data\\DISASTERS\\1900_2021_DISASTERS.csv')
     pd_temp = pd.read_csv('C:\\Users\\msbar\\Data Engineering Final Project\\data\\GlobalLandTemperaturesByCountry.csv')
     pd_pop = pd.read_csv('C:\\Users\\msbar\\Data Engineering Final Project\\data\\Population\\population_total_long.csv')
@@ -19,11 +19,11 @@ def checkrownumb(cur, conn):
 
     i = 0 
     for query in rowcolcheck_queries:
-        df = cur.execute(query)
+        df = pd.read_sql_query(query, conn)
         if df.shape[0] == shape[i][0]:
-            print("All rows have been entered")
+            print("All rows of " + text[i] + " have been entered")
         if df.shape[1] == shape[i][1]:
-            print("All columns have been entered")
+            print("All columns of " + text[i] + " have been entered")
         i = i + 1
         #conn.commit()
 
@@ -36,11 +36,11 @@ def checknulls(cur, conn):
     total_deaths = na['Total Deaths']/pd_d.shape[0]
 
     for query in checknull_queries:
-        df = cur.execute(query)
+        df = pd.read_sql_query(query, conn)
         na_f = df.isna().sum()
-        dg_f = na_f['Disaster Group']/pd_d.shape[0]
-        dt_f = na_f['Disaster Type']/pd_d.shape[0]
-        total_deaths_f = na['Total Deaths']/pd_d.shape[0]
+        dg_f = na_f['disaster_group']/df.shape[0]
+        dt_f = na_f['disaster_type']/df.shape[0]
+        total_deaths_f = na_f['total_deaths']/df.shape[0]
         if dg_f > 0:
             print("Disaster Group Nulls Exist")
         else:
@@ -51,10 +51,10 @@ def checknulls(cur, conn):
         else: 
             print("Disaster Type contains no Nulls")
 
-        if total_deaths_f >= total_deaths:
-            print("More than 30 percent total_death rows are empty")
+        if total_deaths_f == total_deaths:
+            print("Percentage of Null in total_death column is equal to input")
         else:
-            print("Total Deaths are filled out for more than 30 percent of rows")
+            print("Percentage of Null in total_death column is NOT equal to input")
         
         #cur.execute(query)
         #conn.commit()
