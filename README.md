@@ -46,7 +46,6 @@
 - Count Natural Diasters by country
 - GroupBy Natural Disaster type & look at deaths & damages to find the worst type of disaster 
 - Table with natural disaster count by country and order by population 
-- 
 
 ### Graphs: 
 - Graph natural Disater by emission
