@@ -7,6 +7,11 @@
 
 ### Current Steps: 
 - Without access to AWS I wanted to create a POSTGRESQL local host db to do data analysis
+1. Go to PostGreSQL_dataqueries.ipynb file 
+2. run scripts to create tables
+3. run scripts to insert data into tables 
+4. run queries to execute queries 
+5. run visualization and ML analysis cells
 
 ### AWS Steps: 
 1. Add CSV files to an S3 bucket
