@@ -5,7 +5,7 @@
 - Take these .csv data files and create an ETL to migrate data to tables in redshift 
 - Check out Data_Model.ipynb to see the final Data Model structure
 
-### Current Steps: 
+### PostGreSQL Steps: 
 - Without access to AWS I wanted to create a POSTGRESQL local host db to do data analysis
 1. Go to PostGreSQL_dataqueries.ipynb file 
 2. run scripts to create tables
